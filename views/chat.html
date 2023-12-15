@@ -391,10 +391,8 @@
 <script src="https://cdn.socket.io/4.3.2/socket.io.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Kết nối tới server socket đang lắng nghe
         var socket = io.connect('http://localhost:8000');
 
-        // Socket nhận data và append vào giao diện
         socket.on("send", function (data) {
             console.log(data);
             var content = document.getElementById("content");
@@ -404,7 +402,6 @@
             content.appendChild(messageElement);
         });
 
-        // Bắt sự kiện click gửi message
         var sendMessageButton = document.getElementById("sendMessage");
         sendMessageButton.addEventListener('click', function () {
             var username = document.getElementById('username').value;
@@ -413,7 +410,6 @@
             if (username == '' || message == '') {
                 alert('Please enter name and message!!');
             } else {
-                // Gửi dữ liệu cho socket
                 socket.emit('send', { username: username, message: message });
                 document.getElementById('message').value = '';
             }
